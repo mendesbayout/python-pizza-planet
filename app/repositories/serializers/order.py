@@ -22,4 +22,3 @@ class OrderSerializer(ma.SQLAlchemyAutoSchema):
             'size',
             'detail'
         )
-

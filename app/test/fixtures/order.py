@@ -1,14 +1,6 @@
-import json
-
 import pytest
-from datetime import datetime
 from faker import Faker
-from faker.generator import random
-from app.repositories.models import Ingredient, Size, Beverage
-from ..utils.functions import (shuffle_list, get_random_sequence,
-                               get_random_string, get_random_phone, get_random_choice, create_random_date,
-                               )
-from ...controllers import IngredientController, SizeController
+from ..utils.functions import (create_random_date)
 
 
 def client_data_mock() -> dict:
@@ -35,6 +27,7 @@ def client_data():
 def clients_data():
     return [client_data_mock() for _ in range(3)]
 
+
 @pytest.fixture
 def order(create_beverages, create_ingredients, create_size, client_data) -> dict:
     ingredients = [ingredient.get('_id') for ingredient in create_ingredients]
@@ -46,6 +39,8 @@ def order(create_beverages, create_ingredients, create_size, client_data) -> dic
         'beverages': beverages,
         'size_id': size_id
     }
+
+
 @pytest.fixture
 def create_order(client, order_uri, create_ingredients, create_beverages, create_size, client_data):
     ingredients = [ingredient.get('_id') for ingredient in create_ingredients]

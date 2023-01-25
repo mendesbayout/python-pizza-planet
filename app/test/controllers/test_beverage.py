@@ -1,4 +1,3 @@
-import pytest
 from app.controllers import IngredientController
 
 
@@ -27,6 +26,7 @@ def test_update(app, ingredient: dict):
     for param, value in updated_fields.items():
         assert updated_ingredient[param] == value
         assert ingredient_from_database[param] == value
+
 
 def test_get_by_id(app, ingredient: dict):
     created_ingredient, _ = IngredientController.create(ingredient)
