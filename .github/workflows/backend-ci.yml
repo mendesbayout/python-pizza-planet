@@ -51,6 +51,15 @@ jobs:
         run: |
           pytest --cov-report term --cov=$TESTS_DIR
 
+      - name: Run Workflow on External PRs
+        if: github.event.pull_request.head.repo.id != github.event.repository.id
+        uses: actions/create-or-update-workflow-run@v2
+        with:
+          workflow_file: .github/workflows/backend-ci.yml
+          inputs: |
+            TESTS_DIR: app/test/
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Coverage Comment
         if: ${{ failure() || steps.changes.outputs.any == 'true' }}
         id: coverage_comment
