@@ -1,1 +1,1 @@
-from custom_generator import DateTime
+from custom_generator import DateTimeGenerator

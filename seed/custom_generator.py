@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from faker.generator import random
 
 

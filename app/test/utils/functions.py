@@ -16,6 +16,10 @@ def create_random_date():
     return faker.date_between(start_date='-2y', end_date='today')
 
 
+def get_random_sample(iterable: Union[tuple, list], length: int = 10) -> list:
+    return [random.choice(iterable) for _ in range(length)]
+
+
 def get_random_choice(choices: Union[tuple, list]) -> Any:
     return random.choice(choices)
 
