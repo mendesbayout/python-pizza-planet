@@ -1,5 +1,3 @@
-import pytest
-
 from app.test.utils.functions import get_random_string, get_random_price
 
 
