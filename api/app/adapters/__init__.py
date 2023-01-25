@@ -1,0 +1,1 @@
+from api.app.adapters.dynamodb.ingredientAdapter import IngredientAdapter
