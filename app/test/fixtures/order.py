@@ -1,5 +1,9 @@
+import json
+
 import pytest
 from faker import Faker
+from flask import Response
+
 from ..utils.functions import (create_random_date)
 
 
@@ -33,16 +37,17 @@ def order(create_beverages, create_ingredients, create_size, client_data) -> dic
     ingredients = [ingredient.get('_id') for ingredient in create_ingredients]
     beverages = [beverage.get('_id') for beverage in create_beverages]
     size_id = create_size.json['_id']
-    return {
+    order_data = {
         **client_data,
         'ingredients': ingredients,
         'beverages': beverages,
         'size_id': size_id
     }
+    return order_data
 
 
 @pytest.fixture
-def create_order(client, order_uri, create_ingredients, create_beverages, create_size, client_data):
+def create_order(create_beverages, create_ingredients, create_size, client_data):
     ingredients = [ingredient.get('_id') for ingredient in create_ingredients]
     beverages = [beverage.get('_id') for beverage in create_beverages]
     size_id = create_size.json['_id']
@@ -50,8 +55,7 @@ def create_order(client, order_uri, create_ingredients, create_beverages, create
         **client_data,
         'ingredients': ingredients,
         'beverages': beverages,
-        'size_id': size_id,
-        'date': create_random_date()
+        'size_id': size_id
     }
     return order_data
 
@@ -76,3 +80,20 @@ def get_order_by_id_service():
 def get_orders_service(client, order_uri):
     response = "200"
     return response
+
+
+@pytest.fixture
+def create_order_with_invalid_data():
+    return {'error': 'Missing required fields'}
+
+@pytest.fixture
+def get_order_by_id_with_invalid_id():
+    return {'error': 'Invalid ID'}
+
+@pytest.fixture
+def get_order_by_id_with_nonexistent_id():
+    return {'error': 'Order not found'}
+
+@pytest.fixture
+def get_orders_with_no_orders():
+    return {'error': 'No orders found'}
