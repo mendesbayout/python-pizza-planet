@@ -1,5 +1,3 @@
-import pytest
-
 
 def test_create_order_service(create_order):
     order = create_order
@@ -21,8 +19,3 @@ def test_get_order_by_id_service(get_order_by_id_service):
     assert order['total_price'], 'Order should have a total price'
     assert order['size']['_id'], 'Order should have a size'
     assert order['size'], 'Order should have a size'
-
-
-
-
-
