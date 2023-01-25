@@ -1,10 +1,5 @@
-import json
-
 import pytest
 from faker import Faker
-from flask import Response
-
-from ..utils.functions import (create_random_date)
 
 
 def client_data_mock() -> dict:
@@ -86,13 +81,16 @@ def get_orders_service(client, order_uri):
 def create_order_with_invalid_data():
     return {'error': 'Missing required fields'}
 
+
 @pytest.fixture
 def get_order_by_id_with_invalid_id():
     return {'error': 'Invalid ID'}
 
+
 @pytest.fixture
 def get_order_by_id_with_nonexistent_id():
     return {'error': 'Order not found'}
+
 
 @pytest.fixture
 def get_orders_with_no_orders():
