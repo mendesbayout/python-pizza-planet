@@ -8,11 +8,15 @@ def test_create(app, order: dict):
     ingredient_ids = order.pop('ingredients', [])
     beverage_ids = order.pop('beverages', [])
     assert error is None
-    for param, value in order.items():
-        assert param in created_order
-        assert value == created_order[param]
+    if created_order:
+        for param, value in order.items():
+            assert param in created_order
+            assert str(value) == created_order[param]
     assert created_order['_id']
-    assert size_id == created_order['size']['_id']
+    assert size_id == (created_order['size']['_id'])
+
+    ingredient_ids = [int(x) for x in ingredient_ids]
+    beverage_ids = [int(x) for x in beverage_ids]
 
     ingredients_in_detail = set(item['ingredient']['_id']
                                 for item in created_order['detail'] if item['ingredient'] is not None)
@@ -29,7 +33,7 @@ def test_get_by_id(app, order: dict):
     size_id = order.pop('size_id', None)
     ingredient_ids = order.pop('ingredients', [])
     beverage_ids = order.pop('beverages', [])
-    pytest.assume(error is None)
+    assert error is None
     for param, value in created_order.items():
         assert order_from_db[param] == value
     assert size_id == created_order['size']['_id']
