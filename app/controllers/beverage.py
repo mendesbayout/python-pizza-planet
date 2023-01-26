@@ -7,4 +7,3 @@ class BeverageController(BaseController):
     @classmethod
     def create_manager(cls) -> BaseManager:
         return BeverageManager()
-

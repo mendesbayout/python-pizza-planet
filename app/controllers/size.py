@@ -8,4 +8,3 @@ class SizeController(BaseController):
     @classmethod
     def create_manager(cls) -> BaseManager:
         return SizeManager()
-
