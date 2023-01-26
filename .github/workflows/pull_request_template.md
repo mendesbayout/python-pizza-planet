@@ -12,6 +12,4 @@
 
 #### 🚦 Functional Testing Results:
 
-
 - List of tests performed, using bullet points and/or screenshots as needed (i.e., "Functionally tested Checkout on localhost" or "Here is the script output results")
-

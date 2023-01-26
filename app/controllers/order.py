@@ -2,13 +2,17 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from ..common.utils import check_required_keys
 from ..repositories.managers import (BeverageManager, IngredientManager,
-                                     OrderManager, SizeManager)
+                                     OrderManager, SizeManager, BaseManager)
 from .base import BaseController
 
 
 class OrderController(BaseController):
-    manager = OrderManager
+    manager = OrderManager()
     __required_info = ('client_name', 'client_dni', 'client_address', 'client_phone', 'size_id')
+
+    @classmethod
+    def create_manager(cls) -> BaseManager:
+        return OrderManager()
 
     @staticmethod
     def calculate_order_price(size_price: float, ingredients: list, beverages: list) -> float:
