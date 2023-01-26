@@ -9,10 +9,30 @@ terraform {
 provider "aws" {
   region = "us-west-2"
 }
+resource "aws_s3_bucket_policy" "terraform_state" {
+  bucket = aws_s3_bucket.terraform_state.id
 
-resource "aws_s3_bucket" "my_terraform_state_bucket" {
-  bucket = "my-terraform-state-bucket"
-  acl    = "private"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<YOUR ACCOUNT ID>:user/terraform"
+      },
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::my-terraform-state-bucket/*"
+      ]
+    }
+  ]
+}
+EOF
 }
 
 resource "aws_cloudfront_distribution" "my_distribution" {
@@ -32,7 +52,11 @@ resource "aws_cloudfront_distribution" "my_distribution" {
     target_origin_id       = ""
     viewer_protocol_policy = ""
   }
-  restrictions {}
+  restrictions {
+    geo_restriction {
+      restriction_type = ""
+    }
+  }
   viewer_certificate {}
 }
 
