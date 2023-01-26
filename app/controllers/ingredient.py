@@ -1,6 +1,8 @@
-from ..repositories.managers import IngredientManager
+from ..repositories.managers import IngredientManager, BaseManager
 from .base import BaseController
 
 
 class IngredientController(BaseController):
-    manager = IngredientManager
+    @classmethod
+    def create_manager(cls) -> BaseManager:
+        return IngredientManager()
