@@ -8,3 +8,4 @@ RUN pip install --no-cache-dir --upgrade -r tflocal-requirements.txt
 ENV LOCALSTACK_HOSTNAME=localstack
 RUN chmod +x ./scripts/terraform-steps.sh
 CMD ["./scripts/terraform-steps.sh"]
+
