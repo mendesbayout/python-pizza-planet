@@ -17,7 +17,6 @@ class OrderController(BaseController):
         price = size_price + ingredients_price + beverages_price
         return price
 
-
     @classmethod
     def create(cls, order: dict):
         current_order = order.copy()
@@ -40,4 +39,3 @@ class OrderController(BaseController):
             return cls.manager.create(order_with_price, ingredients, beverages), None
         except (SQLAlchemyError, RuntimeError) as ex:
             return None, str(ex)
-

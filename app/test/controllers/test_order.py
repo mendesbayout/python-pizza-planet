@@ -1,6 +1,5 @@
 import pytest
 from app.controllers import OrderController
-from app.repositories.models import Ingredient, Beverage
 
 
 def test_create(app, order: dict):

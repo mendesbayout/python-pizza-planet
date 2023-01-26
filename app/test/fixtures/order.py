@@ -109,4 +109,3 @@ def ingredients():
 def beverages():
     return [Beverage(_id=1, name="Coke", price=2.5), Beverage(_id=2, name="Pepsi", price=3.5),
             Beverage(_id=3, name="Sprite", price=2.0)]
-
