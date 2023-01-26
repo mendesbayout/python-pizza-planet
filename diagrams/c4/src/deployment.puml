@@ -1,0 +1,24 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v11.1/dist
+!includeurl AWSPUML/AWSCommon.puml
+!includeurl AWSPUML/Compute/all.puml
+!includeurl AWSPUML/Database/AuroraAmazonRDSInstance.puml
+!includeurl AWSPUML/NetworkingContentDelivery/CloudFront.puml
+!includeurl AWSPUML/Storage/SimpleStorageServiceS3Standard.puml
+
+
+EC2Instance("WebServer", "EC2", "EC2")
+AuroraAmazonRDSInstance("DB", "RDS", "RDS")
+CloudFront("CloudFront", "CloudFront", "CloudFront")
+SimpleStorageServiceS3Standard("S3Bucket", "S3", "S3")
+
+rectangle "Git Repo" as git
+rectangle "Terraform IaS" as terraform
+
+git --> terraform
+terraform --> WebServer
+WebServer --> S3Bucket
+S3Bucket --> CloudFront
+CloudFront --> WebServer
+WebServer --> DB
+@enduml

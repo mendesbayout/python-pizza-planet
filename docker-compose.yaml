@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  terraform:
+    image: hashicorp/terraform:latest
+    environment:
+      - AWS_ACCESS_KEY_ID=your_access_key
+      - AWS_SECRET_ACCESS_KEY=your_secret_key
+    volumes:
+      - .:/app
+      - ./run_terraform.sh:/app/run_terraform.sh
+    working_dir: /app
+    command: sh /app/run_terraform.sh

@@ -36,9 +36,9 @@ def test_get_by_id(app, ingredient: dict):
         assert ingredient_from_db[param] == value
 
 
-def test_get_all(app, ingredients: list):
+def test_get_all(app, ingredient_: list):
     created_ingredients = []
-    for ingredient in ingredients:
+    for ingredient in ingredient_:
         created_ingredient, _ = IngredientController.create(ingredient)
         created_ingredients.append(created_ingredient)
 
