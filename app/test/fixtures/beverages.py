@@ -16,14 +16,9 @@ def beverage_uri():
     return '/beverage/'
 
 
-@pytest.fixture
-def beverage(beverage_mock):
-    return beverage_mock
 
 
-@pytest.fixture
-def beverages(beverage_mock):
-    return [beverage_mock for _ in range(5)]
+
 
 
 @pytest.fixture

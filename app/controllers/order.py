@@ -12,10 +12,11 @@ class OrderController(BaseController):
 
     @staticmethod
     def calculate_order_price(size_price: float, ingredients: list, beverages: list) -> float:
-        ingredients_price = sum([ingredient.price for ingredient in ingredients])
-        beverages_price = sum([beverage.price for beverage in beverages])
+        ingredients_price = sum(ingredient.price for ingredient in ingredients)
+        beverages_price = sum(beverage.price for beverage in beverages)
         price = size_price + ingredients_price + beverages_price
-        return round(price, 2)
+        return price
+
 
     @classmethod
     def create(cls, order: dict):
@@ -39,3 +40,4 @@ class OrderController(BaseController):
             return cls.manager.create(order_with_price, ingredients, beverages), None
         except (SQLAlchemyError, RuntimeError) as ex:
             return None, str(ex)
+
