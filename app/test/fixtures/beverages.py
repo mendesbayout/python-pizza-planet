@@ -17,16 +17,6 @@ def beverage_uri():
 
 
 @pytest.fixture
-def beverage(beverage_mock):
-    return beverage_mock
-
-
-@pytest.fixture
-def beverages(beverage_mock):
-    return [beverage_mock for _ in range(5)]
-
-
-@pytest.fixture
 def create_beverage(client, beverage_uri, beverage_mock) -> dict:
     response = client.post(beverage_uri, json=beverage_mock)
     return response
