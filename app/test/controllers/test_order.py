@@ -55,9 +55,16 @@ def test_get_all(app, order: dict):
 
     orders_from_db, error = OrderController.get_all()
     searchable_orders = {db_order['_id']: db_order for db_order in orders_from_db}
-    pytest.assume(error is None)
+    assert error is None
     for created_order in created_orders:
         current_id = created_order['_id']
         assert current_id in searchable_orders
         for param, value in created_order.items():
             pytest.assume(searchable_orders[current_id][param] == value)
+
+
+def test_calculate_order_price(ingredients, beverages):
+    size_price = 10
+    expected_price = sum(
+        [ingredient.price for ingredient in ingredients] + [beverage.price for beverage in beverages]) + size_price
+    assert OrderController.calculate_order_price(size_price, ingredients, beverages) == expected_price

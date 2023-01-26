@@ -1,6 +1,8 @@
 import pytest
 from faker import Faker
 
+from app.repositories.models import Ingredient, Beverage
+
 
 def client_data_mock() -> dict:
     fake = Faker()
@@ -95,3 +97,15 @@ def get_order_by_id_with_nonexistent_id():
 @pytest.fixture
 def get_orders_with_no_orders():
     return {'error': 'No orders found'}
+
+
+@pytest.fixture
+def ingredients():
+    return [Ingredient(_id=1, name="Pepperoni", price=2.0), Ingredient(_id=2, name="Mushrooms", price=1.5),
+            Ingredient(_id=3, name="Onions", price=1.0)]
+
+
+@pytest.fixture
+def beverages():
+    return [Beverage(_id=1, name="Coke", price=2.5), Beverage(_id=2, name="Pepsi", price=3.5),
+            Beverage(_id=3, name="Sprite", price=2.0)]
